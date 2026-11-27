@@ -1,0 +1,18 @@
+cff-version: "1.2.0"
+message: "If you cite this release, please cite the version-specific DOI."
+title: "An endpoint converse for order-zero Bessel–Fourier coefficients"
+type: software
+authors:
+  - name: "DannyExperiments"
+doi: "10.5281/zenodo.24572923"
+version: "1.0.0"
+date-released: "2026-11-27"
+repository-code: "https://github.com/DannyExperiments/endpoint-bessel-fourier-coefficients"
+url: "https://github.com/DannyExperiments/endpoint-bessel-fourier-coefficients/releases/tag/v1.0.0"
+abstract: "A nonnegative weighted-integrable function realizes every prescribed slow-decay lower bound at the order-zero endpoint."
+keywords:
+  - "Bessel–Fourier coefficients"
+  - "endpoint converse"
+  - "radial autocorrelation"
+  - "Dirichlet heat semigroup"
+  - "Fourier coefficient decay"

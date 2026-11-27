@@ -1,0 +1,2 @@
+PASS: 1024 exact squared dyadic weights, 64 endpoint checks, and disk multiplier floor.
+PASS: numerical unit radial mass and 97 disk-transform agreement checks.

@@ -1,0 +1,202 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1.02in]{geometry}
+\DeclareFontShape{OT1}{cmr}{bx}{n}{<-> cmbx10}{}
+\DeclareMathSizes{8}{8}{8}{8}
+\DeclareMathSizes{9}{9}{8}{8}
+\DeclareMathSizes{10.95}{10.95}{8}{8}
+\newtheorem{theorem}{Theorem}
+\title{An endpoint converse for order-zero Bessel--Fourier coefficients}
+\date{November 27, 2026}
+\begin{document}
+\begin{abstract}
+Given any nonnegative null sequence \(a_m\), a nonnegative
+function \(f\) in \(L^1([0,1],x\,dx)\), supported in
+\([0,1/2]\), has order-zero Bessel--Fourier coefficients
+with \(a_m\le f_m/\sqrt{j_m}\to0\). The construction uses
+dilates of a radial autocorrelation and dyadically chosen
+masses. It proves Acosta Babb's endpoint existence statement
+unconditionally. A separate heat-semigroup argument rules
+out the stronger single-parity statement.
+\end{abstract}
+\maketitle
+
+\section{The endpoint and its kernel}
+Let \(j_m\) be the \(m\)-th positive zero of \(J_0\), with
+the coefficient convention of Acosta Babb \cite{acosta},
+\[
+ f_m=\frac{2}{J_1(j_m)^2}\int_0^1 f(x)J_0(j_m x)x\,dx .
+\]
+The endpoint existence statement is Conjecture~3 of the
+dissertation \cite[Sec.~5.5, p.~88]{thesis} and appears as
+a conditional Corollary~5.2 in the journal version
+\cite[p.~13]{acosta}.
+
+\begin{theorem}
+For every sequence \(a_m\ge0\) with \(a_m\to0\), there is a
+nonnegative \(f\in L^1([0,1],x\,dx)\), supported in
+\([0,1/2]\), such that
+\[
+                  0\le a_m\le f_m/\sqrt{j_m}\to0 .
+\]
+\end{theorem}
+
+Choose a radial nonnegative smooth probability density \(h\)
+on \(\mathbb R^2\) supported in the disk of radius \(1/2\).
+Set \(g=h*\widetilde h\), with \(\widetilde h(z)=h(-z)\).
+The function \(g\) is radial, nonnegative, smooth, of integral
+one, and supported in the unit disk. Using
+\(\widehat g(\xi)=\int_{\mathbb R^2}e^{-i\xi\cdot z}g(z)\,dz\),
+write \(\widehat g(\xi)=\psi(|\xi|)\). Then
+\(\psi=|\widehat h|^2\ge0\), \(\psi(0)=1\), and \(\psi\le1\).
+Integration by parts gives rapid decay. Consequently there
+are \(s_0\in(0,1/2]\) and \(C>0\) such that
+\[
+  \psi(s)\ge\frac12\quad (0\le s\le s_0),\qquad
+  \psi(s)\le C\min(1,s^{-2})\quad(s>0).
+\]
+For \(0<r\le1\) set \(g_r(z)=r^{-2}g(z/r)\) and
+\(F_r(x)=2\pi g_r((x,0))\). Polar coordinates give
+\[
+ \int_0^1 F_r(x)x\,dx=1,\qquad
+ \int_0^1 F_r(x)J_0(j_m x)x\,dx=\psi(r j_m).
+\]
+For the second identity integrate the Fourier phase in the
+angular variable to obtain \(J_0\). The same angular
+representation gives \(|J_0(y)|\le1\) for real \(y\).
+
+\section{Choice of scales and both estimates}
+The Bessel asymptotics in \cite[Lemma~2.2]{acosta} give
+\(j_m\asymp m\) and \(|J_1(j_m)|\asymp j_m^{-1/2}\).
+The finitely many small indices are included since the positive
+zeros of \(J_0\) are simple and \(J_0'=-J_1\).
+Thus
+\[
+   B_m=\frac{2}{\sqrt{j_m}J_1(j_m)^2}\asymp\sqrt m.
+\]
+Fix \(c>0\), \(D\ge1\) with \(B_m\ge c\sqrt m\) and
+\(j_m\le Dm\) for all \(m\). For \(k\ge0\) set
+\[
+  A_k=\max_{2^k\le m<2^{k+1}}a_m,\qquad
+  r_k=\frac{s_0}{D\,2^{k+1}},\qquad
+  w_k=\frac2c\,A_k2^{-k/2}.
+\]
+The sequence \(A_k\) is bounded and tends to zero, so
+\(\sum_k w_k<\infty\). The nonnegative sum
+\(f=\sum_{k\ge0}w_kF_{r_k}\) converges in the weighted
+\(L^1\) space, with support in \([0,1/2]\).
+Since \(J_0\) is bounded, each coefficient may be taken
+term by term. In particular
+\[
+                  f_m/\sqrt{j_m}=B_m\sum_{k\ge0}w_k\psi(r_k j_m).
+\]
+Each summand is nonnegative. If \(m\) is in block \(\ell\),
+then \(r_\ell j_m\le s_0\) and
+\(B_m\ge c\,2^{\ell/2}\). The summand \(k=\ell\) alone
+contributes at least \(A_\ell\ge a_m\).
+
+For convergence, \(B_m\le C_1 2^{\ell/2}\), and
+\(r_kj_m\ge C_2 2^{\ell-k}\) for absolute constants determined
+by \(h\) and the preceding comparisons. For \(k\ge\ell\) use
+\(\psi\le1\). For \(k<\ell\) use the inverse-square bound.
+The normalized coefficient is at most a fixed multiple of
+\[
+       \sum_{k\ge\ell} A_k2^{-(k-\ell)/2}
+         + \sum_{k<\ell} A_k2^{-3(\ell-k)/2}.
+\]
+The first sum is bounded by a geometric constant times
+\(\sup_{k\ge\ell}A_k\). In the second, each fixed initial term
+decays as \(\ell\to\infty\), and the tail is bounded by a
+geometric constant times \(\sup_{k\ge K} A_k\) for any cutoff
+\(K\). Both sums tend to zero. This proves the theorem.
+
+\section{The single-parity obstruction}
+The same article proposes in Conjecture~2 that one parity may
+vanish while the other has the stated positive lower bounds
+\cite[p.~13]{acosta}. This stronger statement fails for
+\(a_m=1/\log(m+2)\), even without a decay requirement.
+Both index conventions in its two clauses give the same
+growth estimate on the retained parity.
+
+Let \(U_t\) be radial Dirichlet heat evolution on the unit disk
+for \(t>0\). The heat semigroup preserves radial functions.
+It is positive and \(L^1\)-contractive: its symmetric kernel is
+nonnegative and has mass at most one in each variable, by the
+killed heat representation or the maximum principle and
+symmetry \cite{heat}. In radial coordinates,
+\[
+ \left|\int_0^1 (U_t f)(x)x\,dx\right|
+     \le\|f\|_{L^1(x\,dx)} .
+\]
+The radial eigenfunctions are \(J_0(j_m x)\) with heat factors
+\(e^{-tj_m^2}\), and their integral against \(x\,dx\) is
+\(J_1(j_m)/j_m\) \cite[Eq.~(2.8)]{acosta}. Therefore
+\[
+       \int_0^1 (U_t f)(x)x\,dx
+         =\sum_{m\ge1} e^{-tj_m^2} f_m\frac{J_1(j_m)}{j_m}.
+\]
+For bounded radial \(f\) this is the \(L^2\) expansion paired
+with the constant function. For arbitrary \(f\) in the weighted
+\(L^1\) space use bounded truncations. Contractivity gives
+convergence on the left, and on the right the uniform bound
+\(|f_m|\le C_3 j_m\|f\|_{L^1(x\,dx)}\) gives absolute
+summability for every \(t>0\) and justifies passage to the
+limit.
+
+The signs of \(J_1(j_m)\) alternate, since each zero of \(J_0\)
+is simple and \(J_0'=-J_1\). Thus the eventual nonzero terms
+have the same sign. The positive lower bounds on the retained
+parity imply their unsigned magnitudes without the heat factor
+are at least a constant times \(1/(m\log(m+2))\). The latter
+sum diverges on either parity. After discarding finitely many
+terms, whose heat contributions stay bounded, monotone
+convergence as \(t\downarrow0\) contradicts the heat contraction.
+The source's conditional Proposition~5.3 already notes the
+same-sign unweighted integral of the partial sums. The
+heat argument turns that behavior into an obstruction to the
+hypothesized coefficient pattern. No assertion about general
+unregularized divergence follows.
+
+\section*{Prior results and verification}
+Acosta Babb's Theorem~1.4 covers exponents below \(1/2\);
+Corollary~5.2 uses the separate conjecture about positivity of
+a modified Fej\'er kernel. Reports by TruReTuring and Kang
+\cite{tru,kang} give two-term counterexamples to that positivity
+assertion. They leave the endpoint existence statement
+undecided. Here the autocorrelation multiplier is nonnegative
+by construction. The dyadic weighting then compensates for
+the Bessel factor \(\sqrt m\).
+
+The replay checks the exact dyadic algebra and finite numerical
+controls for the illustration. A partial Lean~4 certificate
+checks the two squared-envelope power identities, an own-block
+index comparison, and an exact scalar floor used by the
+illustration. The analytic existence and heat obstruction
+are written proofs. Internally reviewed, not peer reviewed.
+
+Under human direction, ChatGPT Astra~6.2 (OpenAI) generated the
+discovery proof and research packet. OpenAI Codex independently
+checked the mathematics. GPT-6.2 Sol (OpenAI) checked the
+literature and prepared the manuscript, exact dyadic replay,
+partial Lean certificate and illustrations. DannyExperiments
+maintains the repository and is the preferred citation identity.
+No AI system is proposed as an author.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{thesis} R. L. Acosta Babb, \emph{\(L^p\) convergence of
+eigenfunction expansions for the Laplacian on planar domains},
+PhD thesis, University of Warwick, 2024.
+\bibitem{acosta} R. L. Acosta Babb,
+\emph{On the rate of growth of Bessel--Fourier coefficients for integrable
+functions}, J. Math. Anal. Appl. 559(1) (2026), 130440.
+doi:10.1016/j.jmaa.2026.130440.
+\bibitem{heat} E. B. Davies and B. Simon,
+\emph{Ultracontractivity and the heat kernel for Schr\"odinger operators and
+Dirichlet Laplacians}, J. Funct. Anal. 59 (1984), 335--395.
+\bibitem{tru} TruReTuring, \emph{Acosta Babb's weighted Bessel-kernel
+positivity conjecture}, public research dossier ab2410.
+\bibitem{kang} M. Kang, \emph{A two-term counterexample to Bessel--Fourier
+kernel positivity}, MathDB 2610.00793v1, 2026.
+\end{thebibliography}
+\end{document}

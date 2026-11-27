@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Dyadic Bessel kernel explorer</title>
+<style>
+:root{font:16px/1.5 system-ui,sans-serif;color-scheme:dark;color:#eef7ff;background:#0b1523}
+*{box-sizing:border-box}body{margin:0}
+main{max-width:55rem;margin:auto;padding:1.4rem clamp(1rem,4vw,2rem)}
+h1{font-size:clamp(1.55rem,5vw,2.35rem);line-height:1.13;margin:0 0 .55rem}
+h2{font-size:1.03rem;margin:.2rem 0}
+p{color:#c0d4e6;margin:.45rem 0 .85rem}
+.controls{display:grid;gap:.6rem;margin:1rem 0}
+.controls label{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+input[type="range"]{flex:1;min-width:5rem;accent-color:#76dfc7}
+output{min-width:4ch;text-align:right;font-variant-numeric:tabular-nums}
+.panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+article{background:#132338;border:1px solid #38516a;border-radius:.6rem;text-align:center;padding:.64rem}
+canvas{display:block;width:100%;height:auto;margin:auto}
+.caption{margin:.2rem 0 .35rem}
+.result{border-left:4px solid #ffce79;padding:.65rem .75rem;background:#132338;margin-top:1rem}
+.result p{margin:0}
+:focus-visible{outline:2px solid #ffce79;outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+<h1>Narrower bumps reach more modes</h1>
+<p>Choose a dyadic radius. The surface shows the spatial overlap of two uniform disks. Its Fourier multiplier is a square and stays nonnegative.</p>
+<div class="controls">
+  <label for="scale">Scale <input id="scale" type="range" min="1" max="3" value="1"><output id="radius"></output></label>
+  <label for="angle">Rotate <input id="angle" type="range" min="0" max="360" value="34"></label>
+</div>
+<div class="panels">
+<article>
+  <h2>Spatial bump</h2>
+  <canvas id="spatial" width="400" height="300" aria-label="Three-dimensional overlap profile at the selected radius"></canvas>
+  <p class="caption">Height relative to peak</p>
+</article>
+<article>
+  <h2>Fourier multiplier</h2>
+  <canvas id="frequency" width="400" height="300" aria-label="Nonnegative Fourier multiplier with a shaded guaranteed half-height interval"></canvas>
+  <p class="caption">Frequency 0 to 24</p>
+</article>
+</div>
+<div class="result" aria-live="polite"><h2 id="coverage"></h2><p>Halving the spatial radius doubles this guaranteed frequency range. The analytic proof selects a scale and a mass for each dyadic block of Bessel zeros.</p></div>
+<p>The disk gives an explicit teaching example. The manuscript uses a smooth compactly supported autocorrelation and proves the infinite construction.</p>
+</main>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const tau=2*Math.PI;
+const ink="#eff8fe", muted="#bfd3e5", grid="#38516a", teal="#76dfc7", gold="#ffce79";
+const overlap=t=>(2/Math.PI)*(Math.acos(t)-t*Math.sqrt(1-t*t));
+function multiplier(s){
+  const panels=96, dt=Math.PI/(2*panels);
+  let sum=1;
+  for(let i=1;i<panels;i++){
+    const t=i*dt;
+    sum+=(i%2?4:2)*Math.cos(s/2*Math.sin(t))*Math.cos(t)**2;
+  }
+  return ((4/Math.PI)*dt*sum/3)**2;
+}
+function stroke(ctx,array,color,width){
+  ctx.beginPath();
+  ctx.moveTo(...array[0]);
+  for(const p of array.slice(1)) ctx.lineTo(...p);
+  ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();
+}
+function draw(){
+  const power=Number($("scale").value), radius=2**(-power), cutoff=.5/radius;
+  const theta=Number($("angle").value)*Math.PI/180;
+  $("radius").textContent="1/"+2**power;
+  $("coverage").textContent="Multiplier stays above 1/2 through frequency "+cutoff;
+  const spatial=$("spatial").getContext("2d");
+  spatial.clearRect(0,0,400,300);
+  const project=(x,y,z)=>[200+240*(x*Math.cos(theta)+y*Math.sin(theta)),
+    211+67*(-x*Math.sin(theta)+y*Math.cos(theta))-144*z];
+  for(let i=0;i<6;i++){
+    const s=i/5-.5;
+    stroke(spatial,[project(s,-.5,0),project(s,.5,0)],grid,2);
+    stroke(spatial,[project(-.5,s,0),project(.5,s,0)],grid,2);
+  }
+  for(let i=1;i<=10;i++){
+    const t=i/10;
+    stroke(spatial,Array.from({length:41},(_,j)=>
+      project(t*radius*Math.cos(tau*j/40),t*radius*Math.sin(tau*j/40),overlap(t))),teal,2.5);
+  }
+  for(let i=0;i<12;i++){
+    const a=tau*i/12;
+    stroke(spatial,Array.from({length:21},(_,j)=>{
+      const t=j/20;
+      return project(t*radius*Math.cos(a),t*radius*Math.sin(a),overlap(t));
+    }),teal,1.25);
+  }
+  const freq=$("frequency").getContext("2d");
+  freq.clearRect(0,0,400,300);
+  const x=s=>57+316*s/24, y=f=>255-207*f;
+  freq.fillStyle="#274f54";
+  freq.fillRect(x(0),y(1),x(cutoff)-x(0),y(0)-y(1));
+  stroke(freq,[[x(0),y(.5)],[x(24),y(.5)]],grid,2);
+  stroke(freq,[[x(0),y(1)],[x(0),y(0)],[x(24),y(0)]],muted,3);
+  stroke(freq,Array.from({length:101},(_,j)=>{
+    const s=24*j/100;
+    return [x(s),y(multiplier(radius*s))];
+  }),teal,4);
+  stroke(freq,[[x(cutoff),y(1)],[x(cutoff),y(0)]],gold,3);
+  freq.font="26px system-ui";freq.fillStyle=muted;freq.textAlign="right";freq.textBaseline="middle";
+  for(const [f,label] of [[0,"0"],[.5,"½"],[1,"1"]]) freq.fillText(label,x(0)-12,y(f));
+}
+$("scale").addEventListener("input",draw);
+$("angle").addEventListener("input",draw);
+draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "title": "An endpoint converse for order-zero Bessel–Fourier coefficients",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "DannyExperiments"
+    }
+  ],
+  "keywords": [
+    "Bessel–Fourier coefficients",
+    "endpoint converse",
+    "radial autocorrelation",
+    "Dirichlet heat semigroup",
+    "Fourier coefficient decay"
+  ],
+  "description": "<p>Every nonnegative null sequence admits a nonnegative weighted-integrable function supported in [0,1/2] whose normalized coefficients majorize the sequence and tend to zero. This proves Acosta Babb’s endpoint existence statement unconditionally.</p><p>The construction uses radial autocorrelation dilates with nonnegative Fourier multipliers. Dyadic masses offset the square-root Bessel normalization on their own blocks. Two geometric envelopes control the head and tail terms and give normalized convergence. Earlier reports refute the separate modified Fejér kernel positivity premise, which this proof bypasses.</p><p>A separate companion applies L¹-contractive Dirichlet heat evolution to the proposed single-parity coefficient pattern. The constant-function pairing would diverge for a logarithmically slow lower bound on that parity, a contradiction. General unregularized series divergence is outside scope.</p><p>Internally reviewed, not peer reviewed. Python replays exact dyadic arithmetic and numerical illustration controls. A partial Lean certificate checks four auxiliary arithmetic statements. The manuscript contains the analytical proofs.</p><p>Under human direction, ChatGPT Astra 6.2 (OpenAI) generated the discovery proof and research packet. OpenAI Codex independently checked the mathematics. GPT-6.2 Sol (OpenAI) checked the literature and prepared the manuscript, exact dyadic replay, partial Lean certificate and illustrations. DannyExperiments is the preferred citation identity. No AI system is proposed as an author.</p><p>Release v1.0.0. https://github.com/DannyExperiments/endpoint-bessel-fourier-coefficients/releases/tag/v1.0.0</p>",
+  "license": "other-closed",
+  "notes": "All rights reserved. Publicly downloadable files are supplied without a repository-wide reuse license.",
+  "publication_date": "2026-11-27",
+  "version": "1.0.0",
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/DannyExperiments/endpoint-bessel-fourier-coefficients/releases/tag/v1.0.0",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
+}

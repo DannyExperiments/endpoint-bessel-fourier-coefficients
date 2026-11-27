@@ -1,0 +1,4 @@
+'DyadicEnvelope.tail_squared_power' depends on axioms: [propext]
+'DyadicEnvelope.head_squared_power' depends on axioms: [propext, Quot.sound]
+'DyadicEnvelope.own_block_ratio' does not depend on any axioms
+'DyadicEnvelope.disk_floor' depends on axioms: [propext, Classical.choice, Quot.sound]

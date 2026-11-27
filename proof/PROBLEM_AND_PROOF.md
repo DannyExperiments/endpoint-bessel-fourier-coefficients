@@ -1,0 +1,9 @@
+# Problem and proof
+
+For the $m$-th positive zero $j_m$ of $J_0$, define $f_m$ by the source's weighted integral. The endpoint asks whether the normalized coefficients $f_m/\sqrt{j_m}$ can majorize any nonnegative null sequence and tend to zero. [Source Corollary 5.2](https://wrap.warwick.ac.uk/id/eprint/199656/1/1-s2.0-S0022247X26000521-main.pdf#page=13)
+
+Choose a smooth radial nonnegative probability density on a small disk. Convolve it with its reflection to get a nonnegative radial density with nonnegative Fourier transform $\psi$. Its dilated radial profiles $F_r$ have unit weighted mass and coefficient integrals $\psi(rj_m)$. Choose $s_0>0$ with $\psi\ge1/2$ up to $s_0$. Smoothness gives $\psi(s)=O(s^{-2})$ as $s\to\infty$.
+
+For the block $2^k\le m<2^{k+1}$ let $A_k$ be its largest prescribed value. Use radius proportional to $2^{-k}$ so this block lies inside the half-height region. Give it mass proportional to $A_k2^{-k/2}$ to offset the Bessel normalization of order $\sqrt m$. The sum has finite weighted mass. The block's own contribution is at least $A_k$, and all others are nonnegative. In block $\ell$, the contributions with $k\ge\ell$ are bounded by a fixed multiple of $A_k2^{-(k-\ell)/2}$. Those with $k<\ell$ are bounded by a fixed multiple of $A_k2^{-3(\ell-k)/2}$. Summable geometric weights and $A_k\to0$ give the normalized decay.
+
+For the separate parity question use $a_m=1/\log(m+2)$. Pair the Dirichlet heat evolution with the constant function to obtain the sum of $e^{-tj_m^2} f_m J_1(j_m)/j_m$. On the retained parity these terms eventually have the same sign and size before heat damping at least a constant times $1/(m\log(m+2))$. As $t$ decreases to zero this contradicts the weighted $L^1$ heat contraction. The paper justifies the spectral pairing by bounded truncation. [Full proof](../paper/manuscript.pdf)
